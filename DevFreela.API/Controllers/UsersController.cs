@@ -1,6 +1,10 @@
-﻿using DevFreela.Application.Models;
+﻿using DevFreela.Application.Commands.InsertUser;
+using DevFreela.Application.Models;
+using DevFreela.Application.Queries.GetProjectById;
+using DevFreela.Application.Queries.GetUserById;
 using DevFreela.Core.Entities;
 using DevFreela.Infrastructure.Persistence;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,38 +16,32 @@ namespace DevFreela.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly DevFreelaDbContext _context;
-        public UsersController(DevFreelaDbContext context)
+        private readonly IMediator _mediator;
+        public UsersController(DevFreelaDbContext context, IMediator mediator)
         {
             _context = context;
+            _mediator = mediator;
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var user = _context.Users
-                .Include(u => u.Skills)
-                    .ThenInclude(u => u.Skill)
-                .SingleOrDefault(u => u.Id == id);
+            var query = new GetUserByIdQuery(id);
+            var result = await _mediator.Send(query);
 
-            if (user is null)
+            if (!result.IsSuccess)
             {
-                return NotFound();
+                return BadRequest(result.Message);
             }
-
-            var model = UserViewModel.FromEntity(user);
-
-            return Ok(model);
+            return Ok(result);
         }
 
         //POST api/users
         [HttpPost]
-        public IActionResult Post(CreateUserInputModel model)
+        public async Task<IActionResult> Post(InsertUserCommand command)
         {
 
-            var user = new User(model.FullName, model.Email, model.BirthDate);
-
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            var result = await _mediator.Send(command);
 
             return NoContent();
         }
