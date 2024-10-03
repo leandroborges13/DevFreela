@@ -1,12 +1,8 @@
 ﻿using DevFreela.Application.Commands.InsertSkill;
-using DevFreela.Application.Models;
 using DevFreela.Application.Queries.GetAllSkills;
-using DevFreela.Core.Entities;
 using DevFreela.Infrastructure.Persistence;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DevFreela.API.Controllers
 {
