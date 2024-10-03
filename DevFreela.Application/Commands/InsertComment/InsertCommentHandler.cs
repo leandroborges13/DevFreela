@@ -12,6 +12,7 @@ namespace DevFreela.Application.Commands.InsertComment
         {
             _repository = repository;
         }
+
         public async Task<ResultViewModel> Handle(InsertCommentCommand request, CancellationToken cancellationToken)
         {
             var exists = await _repository.Exists(request.IdProject);
