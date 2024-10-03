@@ -18,7 +18,6 @@ namespace DevFreela.Application
         private static IServiceCollection AddHandlers(this IServiceCollection services)
         {
             services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining<InsertProjectCommand>());
-            services.AddTransient<IPipelineBehavior<InsertProjectCommand, ResultViewModel<int>>, ValidateInsertProjectCommandBehavior>();
 
             return services;
         }
