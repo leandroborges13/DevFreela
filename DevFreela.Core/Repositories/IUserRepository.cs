@@ -14,5 +14,6 @@ namespace DevFreela.Core.Repositories
         Task<List<User>> GetAll();
         Task Update(User user);
         Task<bool> Exists(int id);
+        Task AddSkill(UserSkill skill);
     }
 }

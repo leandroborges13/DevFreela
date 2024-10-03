@@ -24,6 +24,12 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
             return user.Id;
         }
 
+        public async Task AddSkill(UserSkill skill)
+        {
+            await _context.UserSkills.AddAsync(skill);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<bool> Exists(int id)
         {
             return await _context.Users.AnyAsync(p => p.Id == id);

@@ -41,8 +41,10 @@ namespace DevFreela.API.Controllers
         }
 
         [HttpPost("{id}/skills")]
-        public IActionResult PostSkills(InsertSkillCommand command)
+        public async Task<IActionResult> PostSkills(InsertSkillCommand command)
         {
+            await _mediator.Send(command);
+
             return NoContent();
         }
 
