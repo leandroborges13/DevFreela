@@ -46,6 +46,18 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
             return await _context.Users.SingleOrDefaultAsync(p => p.Id == id);
         }
 
+        public async Task<User?> GetDetailsById(int id)
+        {
+            var user = await _context.Users
+                .Include(p => p.UserSkills)
+                .Include(p => p.FreelanceProjects)
+                .Include(p => p.OwnedProjects)
+                .Include(p => p.Comments)
+                .SingleOrDefaultAsync(p => p.Id == id);
+
+            return user;
+        }
+
         public async Task Update(User user)
         {
             _context.Users.Update(user);

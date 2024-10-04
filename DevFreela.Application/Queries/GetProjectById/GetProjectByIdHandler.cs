@@ -16,7 +16,7 @@ namespace DevFreela.Application.Queries.GetProjectById
 
         public async Task<ResultViewModel<ProjectViewModel>> Handle(GetProjectByIdQuery request, CancellationToken cancellationToken)
         {
-            var project = await _repository.GetById(request.Id);
+            var project = await _repository.GetDetailsById(request.Id);
 
             if (project is null)
             {

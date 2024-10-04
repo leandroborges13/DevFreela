@@ -116,7 +116,7 @@ namespace DevFreela.API.Controllers
         }
 
         //POST api/projects/12345/comments
-        [HttpPost("{id}")]
+        [HttpPost("{id}/comments")]
         public async Task<IActionResult> PostComments(int id, InsertCommentCommand command)
         {
             var result = await _mediator.Send(command);

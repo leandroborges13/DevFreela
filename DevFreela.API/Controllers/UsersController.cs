@@ -1,6 +1,9 @@
 ﻿using DevFreela.Application.Commands.InsertSkill;
 using DevFreela.Application.Commands.InsertUser;
+using DevFreela.Application.Commands.InsertUserSkill;
+using DevFreela.Application.Queries.GetAllUsers;
 using DevFreela.Application.Queries.GetUserById;
+using DevFreela.Application.Queries.GetUserDetailsById;
 using DevFreela.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +18,32 @@ namespace DevFreela.API.Controllers
         public UsersController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var query = new GetAllUsersQuery();
+            var result = await _mediator.Send(query);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+            return Ok(result);
+        }
+
+        [HttpGet("details/{id}")]
+        public async Task<IActionResult> GetDetailsById(int id)
+        {
+            var query = new GetUserDetailsByIdQuery(id);
+            var result = await _mediator.Send(query);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result.Message);
+            }
+            return Ok(result);
         }
 
         [HttpGet("{id}")]
@@ -41,7 +70,7 @@ namespace DevFreela.API.Controllers
         }
 
         [HttpPost("{id}/skills")]
-        public async Task<IActionResult> PostSkills(InsertSkillCommand command)
+        public async Task<IActionResult> PostSkills(InsertUserSkillCommand command)
         {
             await _mediator.Send(command);
 
