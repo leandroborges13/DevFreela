@@ -1,17 +1,21 @@
 ﻿using DevFreela.Application.Commands.InsertSkill;
 using DevFreela.Application.Commands.InsertUser;
 using DevFreela.Application.Commands.InsertUserSkill;
+using DevFreela.Application.Commands.LoginUser;
 using DevFreela.Application.Queries.GetAllUsers;
 using DevFreela.Application.Queries.GetUserById;
 using DevFreela.Application.Queries.GetUserDetailsById;
 using DevFreela.Infrastructure.Persistence;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevFreela.API.Controllers
 {
     [Route("api/users")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -21,6 +25,7 @@ namespace DevFreela.API.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "client, freelancer")]
         public async Task<IActionResult> GetAll()
         {
             var query = new GetAllUsersQuery();
@@ -34,6 +39,7 @@ namespace DevFreela.API.Controllers
         }
 
         [HttpGet("details/{id}")]
+        [Authorize(Roles = "client, freelancer")]
         public async Task<IActionResult> GetDetailsById(int id)
         {
             var query = new GetUserDetailsByIdQuery(id);
@@ -47,6 +53,7 @@ namespace DevFreela.API.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "client, freelancer")]
         public async Task<IActionResult> GetById(int id)
         {
             var query = new GetUserByIdQuery(id);
@@ -61,6 +68,7 @@ namespace DevFreela.API.Controllers
 
         //POST api/users
         [HttpPost]
+        [Authorize(Roles = "client")]
         public async Task<IActionResult> Post(InsertUserCommand command)
         {
 
@@ -84,6 +92,21 @@ namespace DevFreela.API.Controllers
 
             //processa imagem
             return Ok(description);
+        }
+
+        [HttpPut("login")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
+        {
+
+            var result = await _mediator.Send(command);
+
+            if(!result.IsSuccess)
+            {
+                return BadRequest("Não foi possível efetuar o login!");
+            }
+
+            return Ok(result);
         }
     }
 }

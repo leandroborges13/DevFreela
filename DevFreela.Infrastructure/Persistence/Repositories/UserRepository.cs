@@ -41,6 +41,11 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
                 .Where(p => !p.IsDeleted).ToListAsync();
         }
 
+        public async Task<User> GetByEmailAndPasswordAsync(string email, string passwordHash)
+        {
+            return await _context.Users.SingleOrDefaultAsync(p => p.Email == email && p.Password == passwordHash);
+        }
+
         public async Task<User?> GetById(int id)
         {
             return await _context.Users.SingleOrDefaultAsync(p => p.Id == id);
