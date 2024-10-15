@@ -18,29 +18,15 @@ namespace DevFreela.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Skill>(e => { 
-                
-                e.HasKey(s => s.Id);
+            builder.Entity<Skill>(e => { e.HasKey(s => s.Id); });
 
-                e.HasMany(u => u.UserSkills)
-                      .WithOne(us => us.Skill)
-                      .HasForeignKey(us => us.IdSkill)
-                      .OnDelete(DeleteBehavior.Restrict);
-
-            });
-            
-            builder.Entity<UserSkill>(e => { 
+            builder.Entity<UserSkill>(e => {
                 e.HasKey(us => us.Id);
 
                 e.HasOne(u => u.Skill)
-                        .WithMany(u => u.UserSkills)
-                        .HasForeignKey(s => s.IdSkill)
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                e.HasOne(u => u.User)
-                       .WithMany(u => u.UserSkills)
-                       .HasForeignKey(s => s.IdSkill)
-                       .OnDelete(DeleteBehavior.Restrict);
+                    .WithMany(u => u.UserSkills)
+                    .HasForeignKey(s => s.IdSkill)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             builder.Entity<ProjectComment>(e => {
