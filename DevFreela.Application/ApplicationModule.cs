@@ -37,7 +37,8 @@ namespace DevFreela.Application
             return services;
         }
 
-        private static IServiceCollection AddAuthorizeJwt(this IServiceCollection services, IConfiguration configuration) {
+        private static IServiceCollection AddAuthorizeJwt(this IServiceCollection services, IConfiguration configuration) 
+        {
             services
              .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
              .AddJwtBearer(options =>

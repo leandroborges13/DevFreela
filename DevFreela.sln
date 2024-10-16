@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevFreela.API", "DevFreela.API\DevFreela.API.csproj", "{C9D51099-9EB9-4CA2-B7F8-81C1DF8C3F20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevFreela.API", "DevFreela.API\DevFreela.API.csproj", "{C9D51099-9EB9-4CA2-B7F8-81C1DF8C3F20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevFreela.Core", "DevFreela.Core\DevFreela.Core.csproj", "{34C4B21E-87DC-4743-89C9-6DC1861EE62C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevFreela.Core", "DevFreela.Core\DevFreela.Core.csproj", "{34C4B21E-87DC-4743-89C9-6DC1861EE62C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevFreela.Infrastructure", "DevFreela.Infrastructure\DevFreela.Infrastructure.csproj", "{E1FC79AB-2099-4BD2-875D-B6DE9A4A3767}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevFreela.Infrastructure", "DevFreela.Infrastructure\DevFreela.Infrastructure.csproj", "{E1FC79AB-2099-4BD2-875D-B6DE9A4A3767}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevFreela.Application", "DevFreela.Application\DevFreela.Application.csproj", "{80411638-CE54-49DD-96A0-8003076C2487}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevFreela.Application", "DevFreela.Application\DevFreela.Application.csproj", "{80411638-CE54-49DD-96A0-8003076C2487}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevFreela.UnitTests", "DevFreela.UnitTests\DevFreela.UnitTests.csproj", "{3AB87616-4037-40EE-83AC-3DB194848043}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{80411638-CE54-49DD-96A0-8003076C2487}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80411638-CE54-49DD-96A0-8003076C2487}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80411638-CE54-49DD-96A0-8003076C2487}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AB87616-4037-40EE-83AC-3DB194848043}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AB87616-4037-40EE-83AC-3DB194848043}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AB87616-4037-40EE-83AC-3DB194848043}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AB87616-4037-40EE-83AC-3DB194848043}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
