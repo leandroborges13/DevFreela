@@ -10,7 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<FreelanceTotalCostConfig>(
         builder.Configuration.GetSection("FreelanceTotalCostConfig"));
 
-builder.Services.AddApplication(builder.Configuration).AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication(builder.Configuration)
+                .AddHttpClient()
+                .AddInfrastructure(builder.Configuration);
 
 builder.Services.AddExceptionHandler<ApiExceptionHandler>();
 builder.Services.AddProblemDetails();
@@ -18,7 +20,6 @@ builder.Services.AddProblemDetails();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
 
 builder.Services.AddSwaggerGen(c =>
 {

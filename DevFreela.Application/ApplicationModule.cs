@@ -1,5 +1,10 @@
 ﻿using DevFreela.Application.Commands.InsertProject;
 using DevFreela.Application.Models;
+using DevFreela.Application.Payment;
+using DevFreela.Core.Repositories;
+using DevFreela.Core.Services;
+using DevFreela.Infrastructure.Auth;
+using DevFreela.Infrastructure.Persistence.Repositories;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -18,6 +23,7 @@ namespace DevFreela.Application
             services
                 .AddHandlers()
                 .AddValidation()
+                .AddServices()
                 .AddAuthorizeJwt(configuration);
 
             return services;
@@ -34,6 +40,12 @@ namespace DevFreela.Application
         {
             services.AddFluentValidationAutoValidation()
                 .AddValidatorsFromAssemblyContaining<InsertProjectCommand>();
+            return services;
+        }
+
+        private static IServiceCollection AddServices(this IServiceCollection services)
+        {
+            services.AddScoped<IPaymentService, PaymentService>();
             return services;
         }
 
